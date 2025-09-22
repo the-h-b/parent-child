@@ -2,11 +2,105 @@ import React, { useRef, useState, useEffect } from 'react';
 import { motion, useScroll, useTransform, useMotionValue, useSpring } from 'framer-motion';
 
 export default function MoneySection() {
+  const [isYearly, setIsYearly] = useState(false);
   const sectionRef = useRef(null);
   const { scrollYProgress } = useScroll({
     target: sectionRef,
     offset: ['start end', 'end start']
   });
+
+  const pricingPlans = {
+    monthly: [
+      {
+        name: 'Free',
+        price: '$0',
+        description: 'Perfect for trying out Stackinel',
+        features: [
+          'Basic card features',
+          'Up to 2 child accounts',
+          'Basic transaction history'
+        ],
+        cta: 'Get Started',
+        featured: false
+      },
+      {
+        name: 'Family',
+        price: '$6.99',
+        description: 'Perfect for growing families',
+        features: [
+          'Everything in Free, plus:',
+          'Up to 5 child accounts',
+          'Advanced spending controls',
+          'Savings goals & allowances',
+          'Priority customer support'
+        ],
+        cta: 'Start Free Trial',
+        featured: true
+      },
+      {
+        name: 'Premium',
+        price: '$14.99',
+        description: 'For the ultimate family experience',
+        features: [
+          'Everything in Family, plus:',
+          'Unlimited child accounts',
+          'Advanced financial insights',
+          'Custom card designs',
+          'Exclusive rewards & cashback',
+          '24/7 VIP support'
+        ],
+        cta: 'Get Premium',
+        featured: false
+      }
+    ],
+    yearly: [
+      {
+        name: 'Free',
+        price: '$0',
+        description: 'Perfect for trying out Stackinel',
+        features: [
+          'Basic card features',
+          'Up to 2 child accounts',
+          'Basic transaction history'
+        ],
+        cta: 'Get Started',
+        featured: false
+      },
+      {
+        name: 'Family',
+        price: '$4.99',
+        description: 'Perfect for growing families',
+        features: [
+          'Everything in Free, plus:',
+          'Up to 5 child accounts',
+          'Advanced spending controls',
+          'Savings goals & allowances',
+          'Priority customer support',
+          '2 months free (save 20%)'
+        ],
+        cta: 'Start Free Trial',
+        featured: true
+      },
+      {
+        name: 'Premium',
+        price: '$9.99',
+        description: 'For the ultimate family experience',
+        features: [
+          'Everything in Family, plus:',
+          'Unlimited child accounts',
+          'Advanced financial insights',
+          'Custom card designs',
+          'Exclusive rewards & cashback',
+          '24/7 VIP support',
+          '3 months free (save 20%)'
+        ],
+        cta: 'Get Premium',
+        featured: false
+      }
+    ]
+  };
+
+  const plans = isYearly ? pricingPlans.yearly : pricingPlans.monthly;
 
   const [mousePosition, setMousePosition] = useState({ x: 0, y: 0 });
   const spring = {
@@ -372,6 +466,119 @@ export default function MoneySection() {
                 </div>
               </div>
             </div>
+          </div>
+        </div>
+      </div>
+
+      {/* Plan Section */}
+      <div className="py-24 bg-white">
+        <div className="w-full max-w-7xl mx-auto px-4 text-center">
+          <h2 className="text-5xl font-bold text-black mb-6">Simple, transparent pricing</h2>
+          <p className="text-xl text-gray-600 mb-12 max-w-3xl mx-auto">
+            Choose the plan that works best for your family. Cancel anytime, no questions asked.
+          </p>
+          
+          {/* Toggle Switch */}
+          <div className="flex items-center justify-center mb-16">
+            <span className={`text-lg font-medium mr-4 ${!isYearly ? 'text-gray-900 font-semibold' : 'text-gray-600'}`}>Monthly</span>
+            <label className="relative inline-flex items-center cursor-pointer">
+              <input 
+                type="checkbox" 
+                className="sr-only peer" 
+                checked={isYearly}
+                onChange={() => setIsYearly(!isYearly)}
+              />
+              <div className="w-16 h-8 bg-gray-200 rounded-full peer peer-checked:bg-blue-600 transition-colors duration-300">
+                <div className={`absolute top-1 left-1 w-6 h-6 rounded-full bg-white transition-transform duration-300 ${isYearly ? 'transform translate-x-8' : ''}`}></div>
+              </div>
+              <span className={`ml-3 text-lg font-medium ${isYearly ? 'text-gray-900 font-semibold' : 'text-gray-600'}`}>
+                Yearly
+              </span>
+            </label>
+            {isYearly && (
+              <span className="ml-4 px-3 py-1 text-sm font-semibold text-blue-600 bg-blue-100 rounded-full">
+                Save 20%
+              </span>
+            )}
+          </div>
+          
+          {/* Pricing Cards */}
+          <div className="grid md:grid-cols-3 gap-8 max-w-6xl mx-auto">
+            {plans.map((plan, index) => (
+              <motion.div 
+                key={plan.name}
+                className={`relative flex flex-col h-full rounded-2xl p-8 transition-all duration-500 ${isYearly ? 'bg-gradient-to-br from-gray-900 to-gray-800 text-white shadow-xl' : 'bg-white border border-gray-200 text-gray-900'}`}
+                initial={{ opacity: 0, y: 20 }}
+                animate={{ opacity: 1, y: 0 }}
+                transition={{ duration: 0.5, delay: index * 0.1 }}
+                whileHover={{ 
+                  scale: 1.02,
+                  boxShadow: isYearly ? '0 20px 25px -5px rgba(0, 0, 0, 0.3)' : '0 10px 15px -3px rgba(0, 0, 0, 0.1)'
+                }}
+              >
+                {plan.featured && (
+                  <div className="absolute top-0 right-0 bg-blue-600 text-white text-xs font-bold px-3 py-1 rounded-bl-lg rounded-tr-lg">
+                    MOST POPULAR
+                  </div>
+                )}
+                <h3 className={`text-2xl font-bold mb-2 ${isYearly ? 'text-white' : 'text-gray-900'}`}>
+                  {plan.name}
+                </h3>
+                <p className={`mb-6 ${isYearly ? 'text-gray-300' : 'text-gray-600'}`}>
+                  {plan.description}
+                </p>
+                <div className="mb-8">
+                  <span className={`text-4xl font-bold ${isYearly ? 'text-white' : 'text-gray-900'}`}>
+                    {plan.price}
+                  </span>
+                  <span className={`ml-2 ${isYearly ? 'text-gray-400' : 'text-gray-500'}`}>
+                    /month
+                  </span>
+                  <p className={`text-sm mt-1 ${isYearly ? 'text-gray-400' : 'text-gray-500'}`}>
+                    {isYearly ? 'Billed annually' : 'Billed monthly'}
+                  </p>
+                </div>
+                <ul className="space-y-3 text-left mb-8 flex-grow">
+                  {plan.features.map((feature, i) => (
+                    <li key={i} className="flex items-start">
+                      <svg 
+                        className="h-5 w-5 flex-shrink-0 mt-0.5 mr-2" 
+                        fill="none" 
+                        viewBox="0 0 24 24" 
+                        stroke={i === 0 && (feature.includes('Free') || feature.includes('Family')) ? (isYearly ? '#3B82F6' : '#10B981') : (isYearly ? '#60A5FA' : '#10B981')}
+                      >
+                        <path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M5 13l4 4L19 7" />
+                      </svg>
+                      <span className={i === 0 && (feature.includes('Free') || feature.includes('Family')) ? (isYearly ? 'text-blue-400 font-medium' : 'text-green-600 font-medium') : (isYearly ? 'text-gray-300' : 'text-gray-700')}>
+                        {feature}
+                      </span>
+                    </li>
+                  ))}
+                </ul>
+                <div className="mt-auto pt-6">
+                  <motion.button
+                    className={`w-full py-3 px-6 font-medium rounded-lg transition-colors duration-300 ${
+                      plan.featured 
+                        ? 'bg-blue-600 text-white hover:bg-blue-700' 
+                        : isYearly 
+                          ? 'bg-blue-600 text-white hover:bg-blue-700' 
+                          : 'border-2 border-blue-600 text-blue-600 hover:bg-blue-50'
+                    }`}
+                    whileHover={{ scale: 1.02 }}
+                    whileTap={{ scale: 0.98 }}
+                  >
+                    {plan.cta}
+                  </motion.button>
+                </div>
+              </motion.div>
+            ))}
+          </div>
+          
+          <div className="mt-16 text-center">
+            <p className="text-gray-600 mb-4">Need help choosing a plan?</p>
+            <a href="#" className="text-blue-600 font-medium hover:underline">
+              Compare all features →
+            </a>
           </div>
         </div>
       </div>
