@@ -1,7 +1,93 @@
-import React from 'react';
-import { motion } from 'framer-motion';
+import React, { useRef, useState, useEffect } from 'react';
+import { motion, useScroll, useTransform, useMotionValue, useSpring } from 'framer-motion';
 
 export default function MoneySection() {
+  const sectionRef = useRef(null);
+  const { scrollYProgress } = useScroll({
+    target: sectionRef,
+    offset: ['start end', 'end start']
+  });
+
+  const [mousePosition, setMousePosition] = useState({ x: 0, y: 0 });
+  const spring = {
+    type: "spring",
+    damping: 20,
+    stiffness: 100
+  };
+  
+  const x = useSpring(0, spring);
+  const y = useSpring(0, spring);
+  const scale = useSpring(1, spring);
+
+  useEffect(() => {
+    const handleMouseMove = (e) => {
+      const { clientY } = e;
+      const rect = sectionRef.current.getBoundingClientRect();
+      const centerY = rect.top + rect.height / 2;
+      const relativeY = (clientY - centerY) / 100; // Adjust sensitivity
+      
+      // Update position based on mouse movement
+      y.set(relativeY * 30); // Adjust movement range
+      
+      // Scale based on vertical movement (smaller when moving up, larger when moving down)
+      const newScale = 1 - (relativeY * 0.1);
+      scale.set(Math.min(Math.max(newScale, 0.9), 1.1));
+    };
+
+    window.addEventListener('mousemove', handleMouseMove);
+    return () => window.removeEventListener('mousemove', handleMouseMove);
+  }, [y, scale]);
+
+  // Track if we've scrolled past the section
+  const hasScrolledPast = useTransform(
+    scrollYProgress,
+    [0, 0.1],
+    [false, true]
+  );
+
+  // Animate x position based on scroll
+  const xAnim = useTransform(
+    hasScrolledPast,
+    [false, true],
+    [0, 200] // Move to right when scrolled past
+  );
+
+  // Animate opacity based on scroll
+  const opacity = useTransform(
+    hasScrolledPast,
+    [false, true],
+    [0.9, 0] // Fade out when scrolled past
+  );
+
+  // Reset animation when back in view
+  const resetAnimation = () => {
+    x.set(0);
+    opacity.set(0.9);
+  };
+
+  // Setup intersection observer to detect when section is back in view
+  React.useEffect(() => {
+    const observer = new IntersectionObserver(
+      (entries) => {
+        entries.forEach(entry => {
+          if (entry.isIntersecting) {
+            resetAnimation();
+          }
+        });
+      },
+      { threshold: 0.1 }
+    );
+
+    if (sectionRef.current) {
+      observer.observe(sectionRef.current);
+    }
+
+    return () => {
+      if (sectionRef.current) {
+        observer.unobserve(sectionRef.current);
+      }
+    };
+  }, []);
   return (<>
     <section className="pt-4 pb-16 bg-white px-4">
       <div className="w-full mx-auto px-8" style={{ maxWidth: '1800px' }}>
@@ -220,20 +306,27 @@ export default function MoneySection() {
         </div>
 
         {/* Tap Pay Section - Updated Layout */}
-        <div className="relative py-20 bg-black text-white overflow-hidden w-full px-0">
-          {/* Background gradient */}
-          <div className="absolute inset-0 bg-gradient-to-b from-gray-900 to-black"></div>
+        <div ref={sectionRef} className="relative py-20 bg-black text-white overflow-hidden w-screen -ml-[15%] -mr-[1%] pl-[15%] pr-[1.5%]">
+          {/* Background gradient - full width */}
+          <div className="absolute inset-0 w-[120%] -left-[15%] bg-gradient-to-b from-gray-900 to-black"></div>
           
           {/* Hand image in top right with text below */}
-          <div className="absolute top-32 right-16 z-20 flex flex-col items-end">
+          <div className="absolute top-32 right-32 z-20 flex flex-col items-end">
             <motion.div
+              style={{
+                x,
+                y,
+                scale,
+                opacity,
+                willChange: 'transform, opacity',
+              }}
               initial={{ x: 200, opacity: 0 }}
               animate={{ x: 0, opacity: 0.9 }}
               transition={{ 
                 type: 'spring',
-                stiffness: 30,
-                damping: 12,
-                mass: 1,
+                stiffness: 100,
+                damping: 20,
+                mass: 0.5,
                 delay: 0.5,
                 duration: 1.2
               }}
@@ -255,9 +348,9 @@ export default function MoneySection() {
             </p>
           </div>
           
-          <div className="relative z-10 w-full max-w-[2000px] mx-auto px-8">
+          <div className="relative z-10 w-full max-w-[2400px] mx-auto">
             {/* Title in top-left corner */}
-            <div className="absolute top-32 left-16 z-20">
+            <div className="absolute top-3 left-3 z-20">
               <h1 className="text-6xl md:text-7xl lg:text-8xl font-bold leading-tight">
                 Tap. Pay. <span className="block">Done.</span>
               </h1>
