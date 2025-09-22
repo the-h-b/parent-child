@@ -121,6 +121,102 @@ export default function MoneySection() {
             </div>
           </div>
         </div>
+
+        {/* Money Made Simple Section */}
+        <div className="py-24">
+          <div className="w-full mx-auto px-8" style={{ maxWidth: '1800px' }}>
+            <div className="text-center mb-20">
+              <h2 className="text-5xl font-bold text-black mb-6">Money made simple for families</h2>
+              <p className="text-2xl text-gray-600">Empowering kids, while giving parents complete control.</p>
+            </div>
+            
+            <div className="flex flex-col lg:flex-row items-center gap-16">
+              {/* Left side - Text content */}
+              <div className="lg:w-1/2">
+                <h2 className="text-5xl font-bold text-black mb-6">Your child's money, in your hands</h2>
+              <p className="text-lg text-gray-600 mb-10">
+                Stay in control while giving your kids the independence of their own smart card. Junio makes pocket money digital, safe, and fun.
+              </p>
+              
+              <ul className="space-y-4">
+                <li className="flex items-start">
+                  <span className="text-green-500 mr-3 text-xl">✓</span>
+                  <span className="text-gray-700">Set flexible spend limits for your child</span>
+                </li>
+                <li className="flex items-start">
+                  <span className="text-green-500 mr-3 text-xl">✓</span>
+                  <span className="text-gray-700">Instant reloads from your Stackintel app</span>
+                </li>
+                <li className="flex items-start">
+                  <span className="text-green-500 mr-3 text-xl">✓</span>
+                  <span className="text-gray-700">No worries about cash loss or theft</span>
+                </li>
+                <li className="flex items-start">
+                  <span className="text-green-500 mr-3 text-xl">✓</span>
+                  <span className="text-gray-700">Track every transaction in real time</span>
+                </li>
+                <li className="flex items-start">
+                  <span className="text-green-500 mr-3 text-xl">✓</span>
+                  <span className="text-gray-700">Rewards & offers designed just for kids</span>
+                </li>
+              </ul>
+            </div>
+            
+            {/* Right side - Empty space for image */}
+            <div className="lg:w-1/2 h-96 bg-gray-100 rounded-3xl flex items-center justify-center">
+              <span className="text-gray-400">Image Space</span>
+            </div>
+          </div>
+          </div>
+        </div>
+
+        {/* Smart Spending Section */}
+        <div className="py-24 bg-white">
+          <div className="w-full max-w-7xl mx-auto px-4">
+            <div className="flex flex-col lg:flex-row items-center gap-16">
+              {/* Left side - Image */}
+              <div className="lg:w-1/2">
+                <img 
+                  src="/5.png" 
+                  alt="Smart spending with Junio"
+                  className="rounded-3xl w-full h-auto"
+                />
+              </div>
+              
+              {/* Right side - Content */}
+              <div className="lg:w-1/2">
+                <h2 className="text-5xl font-bold text-black mb-6">Smart spending starts here</h2>
+                <p className="text-xl text-gray-600 mb-10">
+                  Teach money management early with Junio. Kids learn the value of money 
+                  while enjoying the convenience of digital payments.
+                </p>
+                
+                <ul className="space-y-5">
+                  <li className="flex items-start">
+                    <span className="text-green-500 mr-3 text-xl">✓</span>
+                    <span className="text-gray-700 text-lg">UPI & card payments made simple</span>
+                  </li>
+                  <li className="flex items-start">
+                    <span className="text-green-500 mr-3 text-xl">✓</span>
+                    <span className="text-gray-700 text-lg">Savings & goals tracking for kids</span>
+                  </li>
+                  <li className="flex items-start">
+                    <span className="text-green-500 mr-3 text-xl">✓</span>
+                    <span className="text-gray-700 text-lg">Notifications for every transaction</span>
+                  </li>
+                  <li className="flex items-start">
+                    <span className="text-green-500 mr-3 text-xl">✓</span>
+                    <span className="text-gray-700 text-lg">Empower kids with financial literacy</span>
+                  </li>
+                  <li className="flex items-start">
+                    <span className="text-green-500 mr-3 text-xl">✓</span>
+                    <span className="text-gray-700 text-lg">Designed for families, made for kids</span>
+                  </li>
+                </ul>
+              </div>
+            </div>
+          </div>
+        </div>
       </div>
     </section>
   </>);

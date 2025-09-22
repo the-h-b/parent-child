@@ -240,10 +240,10 @@ function App() {
         </div>
       </section>
       
-      {/* Stats Section */}
+      {/* App Store and Play Store Ratings */}
       <div style={{
         maxWidth: '1600px',
-        margin: '30px auto 0',
+        margin: '60px auto 0',
         padding: '0 40px',
         display: 'flex',
         justifyContent: 'space-between',
@@ -256,46 +256,78 @@ function App() {
         width: '100%',
         boxSizing: 'border-box'
       }}>
-        <div style={{ 
-          display: 'flex', 
-          alignItems: 'center', 
-          gap: '8px',
-          order: 1
-        }}>
-          <div style={{ display: 'flex' }}>
-            {[...Array(5)].map((_, i) => (
-              <span key={`play-${i}`} style={{ color: '#FFD700', fontSize: '1.1rem' }}>★</span>
-            ))}
-          </div>
-          <span>4.7 Score on Play Store</span>
-        </div>
-        
         <p style={{
           fontSize: '1.2rem',
           margin: 0,
           color: '#666',
-          order: 2,
-          textAlign: 'center',
+          order: 1,
+          textAlign: 'left',
           flex: 1
-        }}>250,000 enterprises use our app</p>
+        }}>250,000+ happy customers</p>
         
         <div style={{ 
           display: 'flex', 
           alignItems: 'center', 
-          gap: '8px',
-          order: 3,
-          justifyContent: 'flex-end'
+          gap: '15px',
+          order: 3
         }}>
-          <div style={{ display: 'flex' }}>
-            {[...Array(5)].map((_, i) => (
-              <span key={`app-${i}`} style={{ color: '#FFD700', fontSize: '1.1rem' }}>★</span>
-            ))}
+          {/* Play Store Rating */}
+          <div style={{ 
+            display: 'flex',
+            alignItems: 'center',
+            gap: '10px',
+            padding: '4px 0'
+          }}>
+            <div style={{ 
+              display: 'flex',
+              gap: '4px'
+            }}>
+              {[...Array(5)].map((_, i) => (
+                <span key={`play-${i}`} style={{ 
+                  color: '#000000', 
+                  fontSize: '1.5rem',
+                  fontWeight: 'bold',
+                  lineHeight: '1'
+                }}>★</span>
+              ))}
+            </div>
+            <span style={{ 
+              fontWeight: '500',
+              fontSize: '1.1rem'
+            }}>4.7 Score on Play Store</span>
           </div>
-          <span>4.8 Score on App Store</span>
+          
+          {/* App Store Rating */}
+          <div style={{ 
+            display: 'flex',
+            alignItems: 'center',
+            gap: '10px',
+            padding: '4px 0'
+          }}>
+            <div style={{ 
+              display: 'flex',
+              gap: '4px'
+            }}>
+              {[...Array(5)].map((_, i) => (
+                <span key={`app-${i}`} style={{ 
+                  color: '#000000', 
+                  fontSize: '1.5rem',
+                  fontWeight: 'bold',
+                  lineHeight: '1'
+                }}>★</span>
+              ))}
+            </div>
+            <span style={{ 
+              fontWeight: '500',
+              fontSize: '1.1rem'
+            }}>4.8 Score on App Store</span>
+          </div>
         </div>
       </div>
 
-      <section className="help-section" style={{ padding: '80px 0', backgroundColor: '#f8f9fa', position: 'relative' }}>
+      <div style={{ height: '60px' }}></div>
+
+      <section className="help-section" style={{ padding: '100px 0', backgroundColor: '#f8f9fa', position: 'relative' }}>
         <div style={{ maxWidth: '1200px', margin: '0 auto', padding: '0 40px', display: 'flex', gap: '60px' }}>
           <div style={{ flex: 1 }}>
             <h2 style={{ textAlign: 'left', fontSize: '2.5rem', marginBottom: '60px', color: '#111827' }}>
@@ -395,7 +427,8 @@ function App() {
         </div>
       </section>
       
-      {/* Third Section - Money Section */}
+      <div style={{ height: '80px' }}></div>
+
       <MoneySection />
     </div>
     </div>
