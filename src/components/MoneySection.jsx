@@ -1,4 +1,5 @@
 import React from 'react';
+import { motion } from 'framer-motion';
 
 export default function MoneySection() {
   return (<>
@@ -217,7 +218,71 @@ export default function MoneySection() {
             </div>
           </div>
         </div>
+
+        {/* Tap Pay Section - Updated Layout */}
+        <div className="relative py-20 bg-black text-white overflow-hidden w-full px-0">
+          {/* Background gradient */}
+          <div className="absolute inset-0 bg-gradient-to-b from-gray-900 to-black"></div>
+          
+          {/* Hand image in top right with text below */}
+          <div className="absolute top-32 right-16 z-20 flex flex-col items-end">
+            <motion.div
+              initial={{ x: 200, opacity: 0 }}
+              animate={{ x: 0, opacity: 0.9 }}
+              transition={{ 
+                type: 'spring',
+                stiffness: 30,
+                damping: 12,
+                mass: 1,
+                delay: 0.5,
+                duration: 1.2
+              }}
+            >
+              <img 
+                src="/hand.png" 
+                alt="Paying with smartwatch"
+                className="h-64 w-auto object-contain"
+                style={{
+                  filter: 'drop-shadow(0 5px 15px rgba(0, 0, 0, 0.3))',
+                  maxWidth: '100%',
+                  height: 'auto',
+                  marginBottom: '1.5rem'
+                }}
+              />
+            </motion.div>
+            <p className="text-xl text-gray-300 leading-relaxed max-w-xl text-right">
+              Stackinel makes transactions smarter and faster. Kids can pay instantly using their smartwatch with UPI integration, while parents enjoy the same level of security and control as with the Stackinel card and app.
+            </p>
+          </div>
+          
+          <div className="relative z-10 w-full max-w-[2000px] mx-auto px-8">
+            {/* Title in top-left corner */}
+            <div className="absolute top-32 left-16 z-20">
+              <h1 className="text-6xl md:text-7xl lg:text-8xl font-bold leading-tight">
+                Tap. Pay. <span className="block">Done.</span>
+              </h1>
+              <h2 className="text-4xl md:text-5xl font-bold text-blue-400 mt-4">PayNOW</h2>
+            </div>
+            
+            <div className="relative min-h-[60vh] w-full flex flex-col items-start justify-between pt-40 pb-12">
+              {/* Spacer to push button to bottom */}
+              <div className="flex-1"></div>
+              
+              {/* Sign up button at bottom left */}
+              <div className="w-full max-w-2xl z-20">
+                <div className="space-y-6 max-w-xl">
+                  <div className="pt-2">
+                    <button className="bg-white hover:bg-gray-100 text-black font-semibold py-3 px-8 rounded-full text-lg transition-all duration-300 transform hover:scale-105">
+                      Sign up for free
+                    </button>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
       </div>
     </section>
-  </>);
+  </>
+);
 }
