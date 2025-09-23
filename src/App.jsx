@@ -1,9 +1,11 @@
 // src/App.jsx
 import React from "react";
-import { motion } from 'framer-motion';
+import { motion, useAnimation } from 'framer-motion';
 import './App.css';
 import { RiWallet3Line, RiShieldCheckLine, RiLightbulbLine, RiVisaLine, RiCheckboxCircleLine } from 'react-icons/ri';
 import MoneySection from './components/MoneySection';
+
+const mobileImg = '/mobile.png';
 
 const features = [
   {
