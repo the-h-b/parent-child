@@ -422,7 +422,10 @@ export default function MoneySection() {
           <div className="absolute inset-0 w-[110%] -left-[5%] bg-gradient-to-b from-gray-900 to-black"></div>
           
           {/* Hand image in top right with text below */}
-          <div className="absolute top-32 right-40 z-20 flex flex-col items-end">
+          <div className="absolute top-20 right-40 z-20 flex flex-col items-end">
+            <p className="text-xl text-gray-300 leading-relaxed max-w-xl text-right mb-2">
+              Stackinel makes transactions smarter and faster. Kids can pay instantly using their smartwatch with UPI integration, while parents enjoy the same level of security and control as with the Stackinel card and app.
+            </p>
             <motion.div
               style={{
                 x: xAnim,
@@ -447,14 +450,10 @@ export default function MoneySection() {
                 style={{
                   filter: 'drop-shadow(0 5px 15px rgba(0, 0, 0, 0.3))',
                   maxWidth: '100%',
-                  height: 'auto',
-                  marginBottom: '1.5rem'
+                  height: 'auto'
                 }}
               />
             </motion.div>
-            <p className="text-xl text-gray-300 leading-relaxed max-w-xl text-right">
-              Stackinel makes transactions smarter and faster. Kids can pay instantly using their smartwatch with UPI integration, while parents enjoy the same level of security and control as with the Stackinel card and app.
-            </p>
           </div>
           
           <div className="relative z-10 w-full max-w-[2400px] mx-auto pl-8">
@@ -656,13 +655,35 @@ export default function MoneySection() {
                   </div>
                 </div>
                 
-                {/* Right side - Placeholder for image */}
-                <div className="mt-16 lg:mt-0 lg:ml-16 lg:flex-shrink-0">
-                  <div className="relative w-full max-w-md mx-auto">
-                    <div className="relative overflow-hidden rounded-2xl bg-gray-800/50 backdrop-blur-sm p-8">
-                      <div className="text-center">
-                        <div className="text-6xl mb-4">📱</div>
-                        <p className="text-gray-300">Mobile app preview</p>
+                {/* Right side - Contained card with images */}
+                <div className="mt-16 lg:mt-0 lg:flex-shrink-0">
+                  <div className="relative w-full max-w-md h-[32rem] bg-gray-800/50 backdrop-blur-sm rounded-2xl p-8">
+                    <div className="relative w-full h-full flex items-center justify-center">
+                      {/* Black card (left, behind) */}
+                      <div className="absolute left-12 top-1/2 -translate-y-1/2 w-56 h-36 rounded-2xl overflow-hidden shadow-2xl z-10 transform -rotate-6">
+                        <img 
+                          src="/Front.jpg" 
+                          alt="Black Card" 
+                          className="w-full h-full object-cover"
+                        />
+                      </div>
+                      
+                      {/* Mobile app (center, front) */}
+                      <div className="relative z-20 w-48">
+                        <img 
+                          src="/mobile.png" 
+                          alt="Mobile App" 
+                          className="w-full h-auto rounded-2xl shadow-2xl"
+                        />
+                      </div>
+                      
+                      {/* Blue card (right, behind) */}
+                      <div className="absolute right-12 top-1/2 -translate-y-1/2 w-56 h-36 rounded-2xl overflow-hidden shadow-2xl z-10 transform rotate-6">
+                        <img 
+                          src="/Blue Card.jpg" 
+                          alt="Blue Card" 
+                          className="w-full h-full object-cover"
+                        />
                       </div>
                     </div>
                   </div>
