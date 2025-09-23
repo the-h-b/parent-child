@@ -1,5 +1,5 @@
-import React, { useRef, useState, useEffect } from 'react';
-import { motion, useScroll, useTransform, useMotionValue, useSpring } from 'framer-motion';
+import React, { useRef, useState, useEffect, useCallback } from 'react';
+import { motion, useScroll, useTransform } from 'framer-motion';
 import Footer from './Footer';
 
 export default function MoneySection() {
@@ -138,34 +138,34 @@ export default function MoneySection() {
     [0, 1, 1, 0] // Fade in quickly, stay visible, then fade out
     )
 
-  // Reset animation when back in view
+  const [inView, setInView] = useState(false);
+
   const resetAnimation = () => {
     // No need to manually set values as they're controlled by scroll
   };
 
   // Setup intersection observer to detect when section is back in view
-  React.useEffect(() => {
+  useEffect(() => {
+    const currentRef = sectionRef.current;
     const observer = new IntersectionObserver(
       (entries) => {
         entries.forEach(entry => {
-          if (entry.isIntersecting) {
-            resetAnimation(  )
-          }
-        }  )
+          setInView(entry.isIntersecting);
+        });
       },
       { threshold: 0.1 }
-      )
+    );
 
-    if (sectionRef.current) {
-      observer.observe(sectionRef.current  )
+    if (currentRef) {
+      observer.observe(currentRef);
     }
 
     return () => {
-      if (sectionRef.current) {
-        observer.unobserve(sectionRef.current  )
+      if (currentRef) {
+        observer.unobserve(currentRef);
       }
     };
-  }, []  )
+  }, [sectionRef]);
 
   return (
     <div className="pt-4 pb-16 bg-white px-4">
@@ -608,9 +608,9 @@ export default function MoneySection() {
           
           <div className="mt-16 text-center">
             <p className="text-gray-600 mb-4">Need help choosing a plan?</p>
-            <a href="#" className="text-blue-600 font-medium hover:underline">
+            <button className="text-blue-600 font-medium hover:underline bg-transparent border-none p-0 cursor-pointer">
               Compare all features →
-            </a>
+            </button>
           </div>
         </div>
       </div>

@@ -1,11 +1,9 @@
 // src/App.jsx
 import React from "react";
-import { motion, useAnimation } from 'framer-motion';
+import { motion } from 'framer-motion';
 import './App.css';
-import { LuStar } from 'react-icons/lu';
 import { RiWallet3Line, RiShieldCheckLine, RiLightbulbLine, RiVisaLine, RiCheckboxCircleLine } from 'react-icons/ri';
 import MoneySection from './components/MoneySection';
-const mobileImg = '/mobile.png';
 
 const features = [
   {
@@ -41,19 +39,8 @@ function App() {
 
   React.useEffect(() => {
     // Animate elements in sequence when component mounts
-    const sequence = async () => {
-      await controls.start({ opacity: 1, y: 0 });
-    };
-    sequence();
+    controls.start({ opacity: 1, y: 0 });
   }, [controls]);
-
-  const navItems = [
-    { name: 'Home', href: '#' },
-    { name: 'Features', href: '#' },
-    { name: 'Solution', href: '#' },
-    { name: 'Company', href: '#' },
-    { name: 'Blog', href: '#' },
-  ];
 
   return (
     <div className="App">
@@ -132,8 +119,7 @@ function App() {
                 transition={{ delay: 0.1 * index }}
                 whileHover={{ y: -2 }}
               >
-                <a 
-                  href="#" 
+                <button 
                   style={{ 
                     color: '#fff', 
                     textDecoration: 'none',
@@ -141,6 +127,10 @@ function App() {
                     fontWeight: 500,
                     position: 'relative',
                     padding: '5px 0',
+                    background: 'none',
+                    border: 'none',
+                    cursor: 'pointer',
+                    fontFamily: 'inherit'
                   }}
                   className="nav-link"
                 >
@@ -154,7 +144,7 @@ function App() {
                     background: 'linear-gradient(90deg, #4facfe 0%, #00f2fe 100%)',
                     transition: 'width 0.3s ease',
                   }} className="nav-underline"></span>
-                </a>
+                </button>
               </motion.li>
             ))}
           </ul>
@@ -373,15 +363,22 @@ function App() {
                     }}>
                       {feature.title}
                     </h3>
-                    <p style={{
-                      margin: 0,
-                      color: '#4b5563',
-                      fontSize: '1.1rem',
-                      lineHeight: '1.7',
-                      maxWidth: '600px'
-                    }}>
+                    <button 
+                      style={{
+                        margin: 0,
+                        color: '#4b5563',
+                        fontSize: '1.1rem',
+                        lineHeight: '1.7',
+                        maxWidth: '600px',
+                        background: 'none',
+                        border: 'none',
+                        padding: 0,
+                        cursor: 'pointer',
+                        fontFamily: 'inherit'
+                      }}
+                    >
                       {feature.description}
-                    </p>
+                    </button>
                   </div>
                 </motion.div>
               ))}

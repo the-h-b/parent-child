@@ -1,5 +1,4 @@
 import React from 'react';
-import { motion } from 'framer-motion';
 
 const Footer = () => {
   return (
@@ -10,10 +9,10 @@ const Footer = () => {
           <div>
             <h3 className="text-xl font-bold mb-6">Product</h3>
             <ul className="space-y-3">
-              <li><a href="#" className="text-gray-400 hover:text-white transition-colors">Home</a></li>
-              <li><a href="#" className="text-gray-400 hover:text-white transition-colors">Features</a></li>
-              <li><a href="#" className="text-gray-400 hover:text-white transition-colors">Pricing</a></li>
-              <li><a href="#" className="text-gray-400 hover:text-white transition-colors">Sign up</a></li>
+              <li><button className="text-gray-400 hover:text-white transition-colors bg-transparent border-none p-0 cursor-pointer text-left">Home</button></li>
+              <li><button className="text-gray-400 hover:text-white transition-colors bg-transparent border-none p-0 cursor-pointer text-left">Features</button></li>
+              <li><button className="text-gray-400 hover:text-white transition-colors bg-transparent border-none p-0 cursor-pointer text-left">Pricing</button></li>
+              <li><button className="text-gray-400 hover:text-white transition-colors bg-transparent border-none p-0 cursor-pointer text-left">Sign up</button></li>
             </ul>
           </div>
           
@@ -21,10 +20,10 @@ const Footer = () => {
           <div>
             <h3 className="text-xl font-bold mb-6">Resources</h3>
             <ul className="space-y-3">
-              <li><a href="#" className="text-gray-400 hover:text-white transition-colors">Blog</a></li>
-              <li><a href="#" className="text-gray-400 hover:text-white transition-colors">Documentation</a></li>
-              <li><a href="#" className="text-gray-400 hover:text-white transition-colors">About</a></li>
-              <li><a href="#" className="text-gray-400 hover:text-white transition-colors">Terms & Conditions</a></li>
+              <li><button className="text-gray-400 hover:text-white transition-colors bg-transparent border-none p-0 cursor-pointer text-left">Blog</button></li>
+              <li><button className="text-gray-400 hover:text-white transition-colors bg-transparent border-none p-0 cursor-pointer text-left">Documentation</button></li>
+              <li><button className="text-gray-400 hover:text-white transition-colors bg-transparent border-none p-0 cursor-pointer text-left">About</button></li>
+              <li><button className="text-gray-400 hover:text-white transition-colors bg-transparent border-none p-0 cursor-pointer text-left">Terms & Conditions</button></li>
             </ul>
           </div>
           
