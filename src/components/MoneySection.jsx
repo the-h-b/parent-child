@@ -1,5 +1,6 @@
 import React, { useRef, useState, useEffect } from 'react';
 import { motion, useScroll, useTransform, useMotionValue, useSpring } from 'framer-motion';
+import Footer from './Footer';
 
 export default function MoneySection() {
   const [isYearly, setIsYearly] = useState(false  )
@@ -269,7 +270,20 @@ export default function MoneySection() {
         </div>
         
         {/* Wallet & Phone Section */}
-        <div className="bg-white rounded-3xl p-14 shadow-xl border border-gray-100 w-full mx-auto mt-0 ml-0.5" style={{ maxWidth: '1600px' }}>
+        <motion.div 
+          className="bg-white rounded-3xl p-14 shadow-xl border border-gray-100 w-full mx-auto mt-0 ml-0.5" 
+          style={{ maxWidth: '1600px' }}
+          initial={{ y: 100, opacity: 0 }}
+          whileInView={{ 
+            y: 0, 
+            opacity: 1,
+            transition: { 
+              duration: 0.8,
+              ease: [0.16, 1, 0.3, 1] // Custom easing for smooth deceleration
+            }
+          }}
+          viewport={{ once: true, margin: '-20% 0px -10% 0px' }}
+        >
           <div className="flex flex-col lg:flex-row items-center">
             <div className="lg:w-1/2 pr-12">
               <h3 className="text-4xl font-bold text-black mb-8">Your child's wallet, always at your fingertips</h3>
@@ -661,5 +675,8 @@ export default function MoneySection() {
         </div>
       </div>
     </div>
+    
+    {/* Footer Section */}
+    <Footer />
   )
 }
