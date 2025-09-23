@@ -2,12 +2,12 @@ import React, { useRef, useState, useEffect } from 'react';
 import { motion, useScroll, useTransform, useMotionValue, useSpring } from 'framer-motion';
 
 export default function MoneySection() {
-  const [isYearly, setIsYearly] = useState(false);
-  const sectionRef = useRef(null);
+  const [isYearly, setIsYearly] = useState(false  )
+  const sectionRef = useRef(null  )
   const { scrollYProgress } = useScroll({
     target: sectionRef,
     offset: ['start end', 'end start']
-  });
+  }  )
 
   const pricingPlans = {
     monthly: [
@@ -107,35 +107,35 @@ export default function MoneySection() {
     scrollYProgress,
     [0, 0.1, 0.9, 1],
     [0, 0, 1, 0]
-  );
+    )
 
   // Animate x position based on scroll (right to left)
   const xAnim = useTransform(
     sectionProgress,
     [0, 1],
     [300, 0] // Start from right (300px off-screen) and move to 0 (final position)
-  );
+    )
 
   // Keep y position fixed (no vertical movement)
   const yAnim = useTransform(
     sectionProgress,
     [0, 1],
     [0, 0]
-  );
+    )
 
   // Add a subtle scale effect on entry/exit
   const scaleAnim = useTransform(
     sectionProgress,
     [0, 1],
     [0.9, 1] // Slight scale up as it enters
-  );
+    )
 
   // Animate opacity based on scroll
   const opacity = useTransform(
     sectionProgress,
     [0, 0.2, 0.8, 1],
     [0, 1, 1, 0] // Fade in quickly, stay visible, then fade out
-  );
+    )
 
   // Reset animation when back in view
   const resetAnimation = () => {
@@ -148,25 +148,26 @@ export default function MoneySection() {
       (entries) => {
         entries.forEach(entry => {
           if (entry.isIntersecting) {
-            resetAnimation();
+            resetAnimation(  )
           }
-        });
+        }  )
       },
       { threshold: 0.1 }
-    );
+      )
 
     if (sectionRef.current) {
-      observer.observe(sectionRef.current);
+      observer.observe(sectionRef.current  )
     }
 
     return () => {
       if (sectionRef.current) {
-        observer.unobserve(sectionRef.current);
+        observer.unobserve(sectionRef.current  )
       }
     };
-  }, []);
-  return (<>
-    <section className="pt-4 pb-16 bg-white px-4">
+  }, []  )
+
+  return (
+    <div className="pt-4 pb-16 bg-white px-4">
       <div className="w-full mx-auto px-8" style={{ maxWidth: '1800px' }}>
         <h2 className="text-5xl font-bold text-black text-left mb-12 max-w-5xl">
           Get the most out of your money
@@ -175,20 +176,30 @@ export default function MoneySection() {
         {/* Two Cards Row */}
         <div className="relative w-full mb-4" style={{ minHeight: '400px' }}>
           {/* Card 1 - White - Smaller Width */}
-          <div
-            className="absolute top-0 bg-white shadow-md border border-gray-100"
+          <motion.div
+            initial={{ x: '-100%', opacity: 0 }}
+            whileInView={{ 
+              x: '0%',
+              opacity: 1,
+              transition: { 
+                duration: 0.8,
+                ease: [0.25, 0.1, 0.25, 1]
+              }
+            }}
+            viewport={{ once: true, margin: '-20% 0px -20% 0px' }}
             style={{
               width: '570px',
               height: '390px',
               overflow: 'hidden',
-              opacity: 1,
               padding: '40px 32px 32px 32px',
               borderRadius: '36px',
               display: 'flex',
               flexDirection: 'column',
               zIndex: 5,
               left: '40%',
-              transform: 'translateX(calc(-100% - 20px))'
+              transform: 'translateX(-100%)',
+              background: 'white',
+              boxShadow: '0 20px 40px rgba(0,0,0,0.1)'
             }}
           >
             <div className="flex-1">
@@ -204,21 +215,31 @@ export default function MoneySection() {
                 className="h-48 w-auto object-contain"
               />
             </div>
-          </div>
+          </motion.div>
           
           {/* Card 2 - Black - Wider Width */}
-          <div
+          <motion.div
             className="absolute top-0 overflow-hidden"
-            style={{
-              width: '900px',
-              height: '390px',
+            initial={{ x: '100%', opacity: 0 }}
+            whileInView={{ 
+              x: '20px',
               opacity: 1,
+              transition: { 
+                duration: 0.8,
+                ease: [0.25, 0.1, 0.25, 1],
+                delay: 0.2
+              }
+            }}
+            viewport={{ once: true, margin: '-20% 0px -20% 0px' }}
+            style={{
+              width: '850px',
+              height: '390px',
               borderRadius: '36px',
               background: 'linear-gradient(90deg, #111111, #222222)',
               padding: '2.5rem',
               zIndex: 5,
               left: '40%',
-              transform: 'translateX(20px)'
+              boxShadow: '0 20px 40px rgba(0,0,0,0.2)'
             }}
           >
             <div className="flex flex-col h-full">
@@ -244,7 +265,7 @@ export default function MoneySection() {
                 />
               </div>
             </div>
-          </div>
+          </motion.div>
         </div>
         
         {/* Wallet & Phone Section */}
@@ -484,19 +505,38 @@ export default function MoneySection() {
           </div>
           
           {/* Pricing Cards */}
-          <div className="grid md:grid-cols-3 gap-8 max-w-6xl mx-auto">
+          <div className="grid md:grid-cols-3 gap-8 max-w-6xl mx-auto items-stretch relative">
             {plans.map((plan, index) => (
               <motion.div 
                 key={plan.name}
                 className={`relative flex flex-col h-full rounded-2xl p-8 transition-all duration-500 ${isYearly ? 'bg-gradient-to-br from-gray-900 to-gray-800 text-white shadow-xl' : 'bg-white border border-gray-200 text-gray-900'}`}
                 initial={{ opacity: 0, y: 20 }}
-                animate={{ opacity: 1, y: 0 }}
-                transition={{ duration: 0.5, delay: index * 0.1 }}
+                animate={{ 
+                  opacity: 1, 
+                  y: 0,
+                  height: 'auto',
+                  minHeight: '650px',
+                  x: 0, // Explicitly set x position to prevent movement
+                  width: '100%' // Ensure consistent width
+                }}
+                transition={{ 
+                  duration: 0.5, 
+                  delay: index * 0.1,
+                  height: { duration: 0.3 }, // Smooth height transitions
+                  x: { duration: 0 }, // Prevent x-axis animation
+                  width: { duration: 0 } // Prevent width animation
+                }}
                 whileHover={{ 
                   scale: 1.02,
                   boxShadow: isYearly ? '0 20px 25px -5px rgba(0, 0, 0, 0.3)' : '0 10px 15px -3px rgba(0, 0, 0, 0.1)'
                 }}
-              >
+                style={{ 
+                  display: 'flex', 
+                  flexDirection: 'column',
+                  height: '100%',
+                  width: '100%',
+                  position: 'relative' // Ensure proper positioning
+                }}>
                 {plan.featured && (
                   <div className="absolute top-0 right-0 bg-blue-600 text-white text-xs font-bold px-3 py-1 rounded-bl-lg rounded-tr-lg">
                     MOST POPULAR
@@ -519,7 +559,7 @@ export default function MoneySection() {
                     {isYearly ? 'Billed annually' : 'Billed monthly'}
                   </p>
                 </div>
-                <ul className="space-y-3 text-left mb-8 flex-grow">
+                <ul className="space-y-3 text-left mb-8 flex-grow min-h-[240px]">
                   {plan.features.map((feature, i) => (
                     <li key={i} className="flex items-start">
                       <svg 
@@ -536,7 +576,7 @@ export default function MoneySection() {
                     </li>
                   ))}
                 </ul>
-                <div className="mt-auto pt-6">
+                <div className="mt-auto pt-6 w-full">
                   <motion.button
                     className={`w-full py-3 px-6 font-medium rounded-lg transition-colors duration-300 ${
                       plan.featured 
@@ -563,7 +603,63 @@ export default function MoneySection() {
           </div>
         </div>
       </div>
-    </section>
-  </>
-);
+      
+      {/* Pocket Money & Smart Payments Section */}
+      <div className="py-24 bg-gray-50">
+        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+          <div className="bg-gradient-to-br from-gray-900 to-black rounded-3xl overflow-hidden shadow-xl">
+            <div className="relative">
+              {/* Decorative elements */}
+              <div className="absolute inset-0 bg-gradient-to-r from-blue-500/10 to-purple-500/10" aria-hidden="true"></div>
+              
+              <div className="relative max-w-7xl mx-auto py-16 px-4 sm:py-24 sm:px-6 lg:px-8 lg:flex lg:items-center lg:justify-between">
+                <div className="lg:w-1/2 lg:pr-12">
+                  <h2 className="text-4xl font-extrabold tracking-tight text-white sm:text-5xl">
+                    <span className="block">Pocket Money &</span>
+                    <span className="block text-blue-400">Smart Payments</span>
+                    <span className="block">for Students</span>
+                  </h2>
+                  <p className="mt-6 text-xl text-gray-300 max-w-2xl">
+                    Join thousands of students and parents who are making money management simple and secure.
+                  </p>
+                  
+                  <div className="mt-10">
+                    <div className="flex flex-col sm:flex-row gap-4 max-w-xl">
+                      <input 
+                        type="email" 
+                        placeholder="Enter your email" 
+                        className="flex-1 px-6 py-4 rounded-full bg-gray-800/80 text-white border border-gray-700 focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-transparent placeholder-gray-400"
+                      />
+                      <button className="bg-blue-600 hover:bg-blue-700 text-white font-medium py-4 px-8 rounded-full transition-colors duration-300 whitespace-nowrap">
+                        Subscribe
+                      </button>
+                    </div>
+                    
+                    <div className="mt-4 flex items-center text-sm text-gray-400">
+                      <svg className="w-4 h-4 mr-2" fill="currentColor" viewBox="0 0 20 20">
+                        <path fillRule="evenodd" d="M10 18a8 8 0 100-16 8 8 0 000 16zm3.707-9.293a1 1 0 00-1.414-1.414L9 10.586 7.707 9.293a1 1 0 00-1.414 1.414l2 2a1 1 0 001.414 0l4-4z" clipRule="evenodd" />
+                      </svg>
+                      <span>No credit card required</span>
+                    </div>
+                  </div>
+                </div>
+                
+                {/* Right side - Placeholder for image */}
+                <div className="mt-16 lg:mt-0 lg:ml-16 lg:flex-shrink-0">
+                  <div className="relative w-full max-w-md mx-auto">
+                    <div className="relative overflow-hidden rounded-2xl bg-gray-800/50 backdrop-blur-sm p-8">
+                      <div className="text-center">
+                        <div className="text-6xl mb-4">📱</div>
+                        <p className="text-gray-300">Mobile app preview</p>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  )
 }
