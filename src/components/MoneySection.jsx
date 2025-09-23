@@ -293,12 +293,12 @@ export default function MoneySection() {
               
               <div className="flex flex-col sm:flex-row gap-6">
                 <img 
-                  src="/app-store.png" 
+                  src="/app store.png" 
                   alt="Download on App Store" 
                   className="h-14 w-auto cursor-pointer hover:opacity-90 transition-opacity"
                 />
                 <img 
-                  src="/google-play.png" 
+                  src="/google play.png" 
                   alt="Get it on Google Play" 
                   className="h-14 w-auto cursor-pointer hover:opacity-90 transition-opacity"
                 />
@@ -319,7 +319,7 @@ export default function MoneySection() {
               />
             </div>
           </div>
-        </div>
+        </motion.div>
 
         {/* Money Made Simple Section */}
         <div className="py-24">
@@ -365,7 +365,6 @@ export default function MoneySection() {
             <div className="lg:w-1/2 h-96 bg-gray-100 rounded-3xl flex items-center justify-center">
               <span className="text-gray-400">Image Space</span>
             </div>
-          </div>
           </div>
         </div>
 
@@ -484,8 +483,7 @@ export default function MoneySection() {
             </div>
           </div>
         </div>
-      </div>
-
+      
       {/* Plan Section */}
       <div className="py-24 bg-white">
         <div className="w-full max-w-7xl mx-auto px-4 text-center">
@@ -672,11 +670,13 @@ export default function MoneySection() {
               </div>
             </div>
           </div>
+            </div>
+          </div>
         </div>
       </div>
+      
+      {/* Footer Section */}
+      <Footer />
     </div>
-    
-    {/* Footer Section */}
-    <Footer />
-  )
+  );
 }
