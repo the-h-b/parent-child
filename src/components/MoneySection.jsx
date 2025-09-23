@@ -102,61 +102,44 @@ export default function MoneySection() {
 
   const plans = isYearly ? pricingPlans.yearly : pricingPlans.monthly;
 
-  const [mousePosition, setMousePosition] = useState({ x: 0, y: 0 });
-  const spring = {
-    type: "spring",
-    damping: 20,
-    stiffness: 100
-  };
-  
-  const x = useSpring(0, spring);
-  const y = useSpring(0, spring);
-  const scale = useSpring(1, spring);
-
-  useEffect(() => {
-    const handleMouseMove = (e) => {
-      const { clientY } = e;
-      const rect = sectionRef.current.getBoundingClientRect();
-      const centerY = rect.top + rect.height / 2;
-      const relativeY = (clientY - centerY) / 100; // Adjust sensitivity
-      
-      // Update position based on mouse movement
-      y.set(relativeY * 30); // Adjust movement range
-      
-      // Scale based on vertical movement (smaller when moving up, larger when moving down)
-      const newScale = 1 - (relativeY * 0.1);
-      scale.set(Math.min(Math.max(newScale, 0.9), 1.1));
-    };
-
-    window.addEventListener('mousemove', handleMouseMove);
-    return () => window.removeEventListener('mousemove', handleMouseMove);
-  }, [y, scale]);
-
-  // Track if we've scrolled past the section
-  const hasScrolledPast = useTransform(
+  // Track scroll progress for the section with custom range for smoother entry/exit
+  const sectionProgress = useTransform(
     scrollYProgress,
-    [0, 0.1],
-    [false, true]
+    [0, 0.1, 0.9, 1],
+    [0, 0, 1, 0]
   );
 
-  // Animate x position based on scroll
+  // Animate x position based on scroll (right to left)
   const xAnim = useTransform(
-    hasScrolledPast,
-    [false, true],
-    [0, 200] // Move to right when scrolled past
+    sectionProgress,
+    [0, 1],
+    [300, 0] // Start from right (300px off-screen) and move to 0 (final position)
+  );
+
+  // Keep y position fixed (no vertical movement)
+  const yAnim = useTransform(
+    sectionProgress,
+    [0, 1],
+    [0, 0]
+  );
+
+  // Add a subtle scale effect on entry/exit
+  const scaleAnim = useTransform(
+    sectionProgress,
+    [0, 1],
+    [0.9, 1] // Slight scale up as it enters
   );
 
   // Animate opacity based on scroll
   const opacity = useTransform(
-    hasScrolledPast,
-    [false, true],
-    [0.9, 0] // Fade out when scrolled past
+    sectionProgress,
+    [0, 0.2, 0.8, 1],
+    [0, 1, 1, 0] // Fade in quickly, stay visible, then fade out
   );
 
   // Reset animation when back in view
   const resetAnimation = () => {
-    x.set(0);
-    opacity.set(0.9);
+    // No need to manually set values as they're controlled by scroll
   };
 
   // Setup intersection observer to detect when section is back in view
@@ -400,29 +383,27 @@ export default function MoneySection() {
         </div>
 
         {/* Tap Pay Section - Updated Layout */}
-        <div ref={sectionRef} className="relative py-20 bg-black text-white overflow-hidden w-screen -ml-[15%] -mr-[1%] pl-[15%] pr-[1.5%]">
+        <div ref={sectionRef} className="relative py-20 bg-black text-white overflow-hidden w-screen -ml-[5%] -mr-[1%] pl-[5%] pr-[1.5%]">
           {/* Background gradient - full width */}
-          <div className="absolute inset-0 w-[120%] -left-[15%] bg-gradient-to-b from-gray-900 to-black"></div>
+          <div className="absolute inset-0 w-[110%] -left-[5%] bg-gradient-to-b from-gray-900 to-black"></div>
           
           {/* Hand image in top right with text below */}
-          <div className="absolute top-32 right-32 z-20 flex flex-col items-end">
+          <div className="absolute top-32 right-40 z-20 flex flex-col items-end">
             <motion.div
               style={{
-                x,
-                y,
-                scale,
+                x: xAnim,
+                y: yAnim,
+                scale: scaleAnim,
                 opacity,
                 willChange: 'transform, opacity',
+                transformOrigin: 'right center', // Makes the animation originate from the right
               }}
-              initial={{ x: 200, opacity: 0 }}
-              animate={{ x: 0, opacity: 0.9 }}
-              transition={{ 
+              initial={{ x: 300, opacity: 0 }}
+              transition={{
                 type: 'spring',
                 stiffness: 100,
                 damping: 20,
-                mass: 0.5,
-                delay: 0.5,
-                duration: 1.2
+                mass: 0.5
               }}
             >
               <img 
@@ -442,7 +423,7 @@ export default function MoneySection() {
             </p>
           </div>
           
-          <div className="relative z-10 w-full max-w-[2400px] mx-auto">
+          <div className="relative z-10 w-full max-w-[2400px] mx-auto pl-8">
             {/* Title in top-left corner */}
             <div className="absolute top-3 left-3 z-20">
               <h1 className="text-6xl md:text-7xl lg:text-8xl font-bold leading-tight">
