@@ -63,16 +63,17 @@ function App() {
         width: '100%',
         maxWidth: '1600px',
         margin: '0 auto',
-        padding: '100px 0 0'
+        padding: '20px 0 50px'
       }}>
 
         <section 
           className="hero" 
           style={{
-            width: '100%',
+            width: '90%',
+            maxWidth: '1200px',
             background: 'radial-gradient(ellipse at top, #1a1a1a 0%, #000000 100%)',
             color: '#fff',
-            padding: '80px 40px 60px',
+            padding: '20px 20px 35px',
             borderRadius: '40px',
             margin: '0 auto',
             display: 'flex',
@@ -80,9 +81,9 @@ function App() {
             alignItems: 'center',
             justifyContent: 'flex-start',
             position: 'relative',
-          overflow: 'hidden',
-          boxSizing: 'border-box',
-        }}
+            overflow: 'hidden',
+            boxSizing: 'border-box',
+          }}
       >
         {/* Navigation */}
         <motion.nav 
@@ -196,7 +197,7 @@ function App() {
             animate={{ opacity: 1, y: 0 }}
             transition={{ duration: 0.7, delay: 0.2 }}
             style={{
-              maxWidth: '900px',
+              maxWidth: '800px',
               width: '100%',
               textAlign: 'center',
               display: 'flex',
@@ -208,10 +209,10 @@ function App() {
           >
             <motion.h1 
               style={{
-                fontSize: '4rem',
+                fontSize: '3.7rem',
                 fontWeight: 800,
-                lineHeight: '1.1',
-                margin: '2rem 0 1.5rem',
+                lineHeight: '1.2',
+                margin: '0.5rem 0 1.25rem',
                 background: 'linear-gradient(to right, #fff, #e0e0e0)',
                 WebkitBackgroundClip: 'text',
                 WebkitTextFillColor: 'transparent',
@@ -225,17 +226,17 @@ function App() {
             
             <motion.p 
               style={{
-                fontSize: '1.2rem',
-                lineHeight: '1.7',
+                fontSize: '1.15rem',
+                lineHeight: '1.65',
                 color: 'rgba(255, 255, 255, 0.85)',
                 maxWidth: '600px',
-                marginBottom: '2.5rem',
+                marginBottom: '2.0rem',
               }}
             >
               Split your purchase into 4 interest-free payments. Pay nothing upfront and make payments every 2nd Friday. Track rewards, purchases, and payments in the app.
             </motion.p>
             
-            <div style={{ marginTop: '40px' }}></div>
+            <div style={{ marginTop: '30px' }}></div>
           </motion.div>
         </div>
       </section>
