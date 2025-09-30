@@ -615,12 +615,12 @@ export default function MoneySection() {
       </div>
       
       {/* Pocket Money & Smart Payments Section */}
-      <div className="py-24 bg-gray-50">
+      <div className="py-24">
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
           <div className="bg-gradient-to-br from-gray-900 to-black rounded-3xl overflow-hidden shadow-xl">
             <div className="relative">
               {/* Decorative elements */}
-              <div className="absolute inset-0 bg-gradient-to-r from-blue-500/10 to-purple-500/10" aria-hidden="true"></div>
+              <div className="absolute inset-0 bg-black/40" aria-hidden="true"></div>
               
               <div className="relative max-w-7xl mx-auto py-16 px-4 sm:py-24 sm:px-6 lg:px-8 lg:flex lg:items-center lg:justify-between">
                 <div className="lg:w-1/2 lg:pr-12">
@@ -654,9 +654,9 @@ export default function MoneySection() {
                   </div>
                 </div>
                 
-                {/* Right side - Contained card with images */}
+                {/* Right side - Contained visuals without card wrapper */}
                 <div className="mt-16 lg:mt-0 lg:flex-shrink-0">
-                  <div className="relative w-full max-w-md h-[32rem] bg-gray-800/50 backdrop-blur-sm rounded-2xl p-8">
+                  <div className="relative w-full max-w-md h-[26rem]">
                     <div className="relative w-full h-full flex items-center justify-center">
                       {/* Black card (left, behind) */}
                       <div className="absolute left-12 top-1/2 -translate-y-1/2 w-56 h-36 rounded-2xl overflow-hidden shadow-2xl z-10 transform -rotate-6">
@@ -676,12 +676,13 @@ export default function MoneySection() {
                         />
                       </div>
                       
-                      {/* Blue card (right, behind) */}
+                      {/* Blue card (right, behind) now black */}
                       <div className="absolute right-12 top-1/2 -translate-y-1/2 w-56 h-36 rounded-2xl overflow-hidden shadow-2xl z-10 transform rotate-6">
                         <img 
                           src="/Blue Card.jpg" 
-                          alt="Blue Card" 
+                          alt="Black Card" 
                           className="w-full h-full object-cover"
+                          style={{ filter: 'grayscale(1) brightness(0.4) contrast(1.4)' }}
                         />
                       </div>
                     </div>

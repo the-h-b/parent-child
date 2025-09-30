@@ -46,7 +46,8 @@ function App() {
   }, [controls]);
 
   return (
-    <div className="App">
+    <div className="App min-h-screen flex flex-col justify-between">
+      <div className="flex-1">
       {/* Hero Section */}
       <div style={{
         position: 'relative',
@@ -431,8 +432,9 @@ function App() {
       <div style={{ height: '80px' }}></div>
 
       <MoneySection />
-      <Footer />
-    </div>
+      </div>
+      </div>
+    <Footer />
     </div>
   );
 }
