@@ -4,6 +4,7 @@ import { motion, useAnimation } from 'framer-motion';
 import './App.css';
 import { RiWallet3Line, RiShieldCheckLine, RiLightbulbLine, RiVisaLine, RiCheckboxCircleLine } from 'react-icons/ri';
 import MoneySection from './components/MoneySection';
+import Footer from './components/Footer';
 
 const mobileImg = '/mobile.png';
 
@@ -430,6 +431,7 @@ function App() {
       <div style={{ height: '80px' }}></div>
 
       <MoneySection />
+      <Footer />
     </div>
     </div>
   );

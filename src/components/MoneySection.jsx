@@ -1,6 +1,5 @@
 import React, { useRef, useState, useEffect, useCallback } from 'react';
 import { motion, useScroll, useTransform } from 'framer-motion';
-import Footer from './Footer';
 
 export default function MoneySection() {
   const [isYearly, setIsYearly] = useState(false  )
@@ -270,10 +269,10 @@ export default function MoneySection() {
         </div>
         
         {/* Wallet & Phone Section */}
-        <motion.div 
-          className="bg-white rounded-3xl p-14 shadow-xl border border-gray-100 w-full mx-auto mt-0 ml-0.5" 
-          style={{ maxWidth: '1600px' }}
-          initial={{ y: 100, opacity: 0 }}
+        <motion.div
+                  className="bg-white rounded-3xl p-8 shadow-xl w-full mx-auto mt-0 ml-0.5"
+                  style={{ maxWidth: '1600px' }}
+                  initial={{ y: 100, opacity: 0 }}
           whileInView={{ 
             y: 0, 
             opacity: 1,
@@ -696,8 +695,7 @@ export default function MoneySection() {
         </div>
       </div>
       
-      {/* Footer Section */}
-      <Footer />
+      
     </div>
   );
 }
